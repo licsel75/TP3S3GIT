@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Mis Superhéroes</title>
+</head>
+<body>
+    <h1>Lista de Superhéroes</h1>
+    
+    <a href="/api/heroes/agregar">➕ Agregar</a>
+    
+    <hr>
+    
+    <% if (superheroes && superheroes.length > 0) { %>
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Nombre Real</th>
+                    <th>Edad</th>
+                    <th>Planeta</th>
+                    <th>Poderes</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% superheroes.forEach(heroe => { %>
+                    <tr>
+                        <td><%= heroe.nombreSuperHeroe %></td>
+                        <td><%= heroe.nombreReal %></td>
+                        <td><%= heroe.edad %></td>
+                        <td><%= heroe.planetaOrigen || 'Desconocido' %></td>
+                        <td>
+                            <% if (heroe.poderes) { %>
+                                <%= heroe.poderes.join(', ') %>
+                            <% } %>
+                        </td>
+                        <td>
+                            <a href="/api/heroes/editar/<%= heroe._id %>">Editar</a>
+                            |
+                            <button onclick="eliminar('<%= heroe._id %>', '<%= heroe.nombreSuperHeroe %>')">Eliminar</button>
+                        </td>
+                    </tr>
+                <% }); %>
+            </tbody>
+        </table>
+    <% } else { %>
+        <p>No hay superhéroes cargados.</p>
+    <% } %>
+    
+    <script>
+        function eliminar(id, nombre) {
+            if (confirm('¿Eliminar a ' + nombre + '?')) {
+                fetch('/api/heroes/' + id, { method: 'DELETE' })
+                    .then(() => window.location.href = '/api/heroes/dashboard');
+            }
+        }
+    </script>
+</body>
+</html>

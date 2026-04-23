@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Agregar Superhéroe</title>
+</head>
+<body>
+    <h1>Agregar Superhéroe</h1>
+    
+    <form action="/api/heroes/agregar" method="POST">
+        <label>Nombre del héroe:</label>
+        <input type="text" name="nombreSuperHeroe" required>
+        <br><br>
+        
+        <label>Nombre real:</label>
+        <input type="text" name="nombreReal" required>
+        <br><br>
+        
+        <label>Edad:</label>
+        <input type="number" name="edad" required>
+        <br><br>
+        
+        <label>Poderes (separados por coma):</label>
+        <input type="text" name="poderes" required>
+        <br><br>
+        
+        <button type="submit">Guardar</button>
+        <a href="/api/heroes/dashboard">Cancelar</a>
+    </form>
+</body>
+</html>
