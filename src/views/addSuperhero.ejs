@@ -1,30 +1,73 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Agregar Superhéroe</title>
 </head>
+
 <body>
     <h1>Agregar Superhéroe</h1>
-    
+
     <form action="/api/heroes/agregar" method="POST">
+
+
         <label>Nombre del héroe:</label>
-        <input type="text" name="nombreSuperHeroe" required>
+        <!-- <input type="text" name="nombreSuperHeroe" required> -->
+        <input type="text" name="nombreSuperHeroe" value="<%= locals.oldData ? oldData.nombreSuperHeroe : '' %>"
+            required>
+
         <br><br>
-        
+
         <label>Nombre real:</label>
-        <input type="text" name="nombreReal" required>
+        <!-- <input type="text" name="nombreReal" required> -->
+        <input type="text" name="nombreReal" value="<%= locals.oldData ? oldData.nombreReal : '' %>" required>
         <br><br>
-        
+
         <label>Edad:</label>
-        <input type="number" name="edad" required>
+        <!-- <input type="number" name="edad" required> -->
+        <input type="number" name="edad" value="<%= locals.oldData ? oldData.edad : '' %>" required>
+
         <br><br>
-        
+
+        <label>Planeta de origen:</label>
+        <!-- <input type="text" name="planetaOrigen"> -->
+        <input type="text" name="planetaOrigen" value="<%= locals.oldData ? oldData.planetaOrigen : '' %>">
+
+        <br><br>
+
+       
+
+
+
+        <label>Debilidad:</label>
+        <input type="text" name="debilidad" value="<%= locals.oldData ? oldData.debilidad : '' %>">
+        <br><br>
+
+        <label>Aliados (separados por coma):</label>
+        <input type="text" name="aliados" value="<%= locals.oldData ? oldData.aliados : '' %>">
+        <br><br>
+
+        <label>Enemigos (separados por coma):</label>
+        <input type="text" name="enemigos" value="<%= locals.oldData ? oldData.enemigos : '' %>">
+        <br><br>
+
+       
+
         <label>Poderes (separados por coma):</label>
-        <input type="text" name="poderes" required>
+        <input type="text" name="poderes" value="<%= locals.oldData ? oldData.poderes : '' %>" required>
         <br><br>
-        
+
+
+
         <button type="submit">Guardar</button>
         <a href="/api/heroes/dashboard">Cancelar</a>
     </form>
 </body>
+<% if (locals.error) { %>
+    <div style="color: red; border: 2px solid red; background: #ffe6e6; padding: 10px; margin: 10px 0;">
+        <strong>❌ Error:</strong>
+        <%= error %>
+    </div>
+    <% } %>
+
 </html>

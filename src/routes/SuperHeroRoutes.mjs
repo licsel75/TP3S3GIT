@@ -8,7 +8,7 @@ import {
   crearSuperheroeController,
   actualizarSuperheroeController,
   eliminarSuperheroePorIdController,
-  eliminarSuperheroePorNombreController, 
+  eliminarSuperheroePorNombreController,
   //  nueva ruta la del dashboard
   mostrarDashboardController,
   mostrarAgregarController,
@@ -32,9 +32,9 @@ const router = express.Router();
 
 router.get('/heroes/dashboard', mostrarDashboardController);// coloco esta ruta antes de las que usan parámetros 
 router.get('/heroes/agregar', mostrarAgregarController);
-router.post('/heroes/agregar', agregarSuperheroeController);
+router.post('/heroes/agregar', validarSuperheroe(), manejarErroresValidacion, agregarSuperheroeController);//con validacion y manejo de errores
 router.get('/heroes/editar/:id', mostrarEditarController);
-router.post('/heroes/editar/:id', editarSuperheroeController);
+router.post('/heroes/editar/:id',validarSuperheroe(), manejarErroresValidacion, editarSuperheroeController);//con validacion y manejo de errores
 
 
 
@@ -55,8 +55,8 @@ router.post('/heroes', validarSuperheroe(), manejarErroresValidacion, crearSuper
 
 //router.put('/heroes/:id', actualizarSuperheroeController); ruta de actualización antes de validar
 
-router.put('/heroes/:id', 
-    validarActualizacion(),manejarErroresValidacion, actualizarSuperheroeController
+router.put('/heroes/:id',
+  validarActualizacion(), manejarErroresValidacion, actualizarSuperheroeController
 );//validarSuperheroe() se agraga nuevamente  validación , manejarErroresValidacion y  manejo de errores
 
 
