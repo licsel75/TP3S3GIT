@@ -4,11 +4,13 @@ import superHeroRoutes from './routes/SuperHeroRoutes.mjs';
 
 
 
-import path from 'path';              // Esta línea es la que falta
-import { fileURLToPath } from 'url';  // Esta también
+import path from 'path';              
+import { fileURLToPath } from 'url';  
 
 const app = express();
 const PORT = process.env.PORT || 3005; //cambié al puerto 3005 porque nada andaba en el 3000
+
+
 
 
 
