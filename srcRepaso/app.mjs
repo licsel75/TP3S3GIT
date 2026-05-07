@@ -1,7 +1,7 @@
 import express from 'express';
 import path from 'path';
 import { fileURLToPath } from 'url';
-import methodOverride from 'method-override';  // ← NUEVO
+import methodOverride from 'method-override';  //  NUEVO MIDDLEWARE PARA QUE LOS FORMUARIOS PUEDAN UNTILIZAR PUT, DELETE, 
 import { connectDB } from './config/dbConfig.mjs';
 
 
@@ -16,10 +16,12 @@ const PORT = 3005;
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 
 // Middlewares básicos
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-app.use(methodOverride('_method'));  // ← NUEVO (para PUT y DELETE)
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.json()); // transforma el cuerpo (body) de las peticiones jason en objetos js disponibles en req.body
+app.use(express.urlencoded({ extended: true }));//Transforma los datos que vienen desde formularios HTML (formato nombre=Juan&edad=30) a un objeto JavaScript en req.body.
+app.use(methodOverride('_method'));  // NUEVO (para PUT y DELETE), engaña a espress, _method=PUT es para express un PUT REAL
+app.use(express.static(path.join(__dirname, 'public')));//El navegador pide /css/style.css Y Express busca public/css/style.css y lo envía.
+
+
 
 // EJS motor de las vitas 
 app.set('view engine', 'ejs');//se define que voy a usar ejs
@@ -38,6 +40,7 @@ console.log('Rutas de héroes montadas en /api/heroes');
 app.get('/', (req, res) => {
     res.redirect('/dashboard');
 });
+//si el navegador peticiona localhost:3005/ se redirige a localhost:3005/dashboard 
 
 
 
@@ -51,3 +54,4 @@ app.get('/', (req, res) => {
 app.listen(PORT, () => {
     console.log(`🚀 Servidor corriendo en http://localhost:${PORT}`); // respuesta en la consola
 });
+//Flujo: El servidor arranca , conecta a MongoDB , queda a la espera de que alguien visite http://localhost:3005/dashboard 

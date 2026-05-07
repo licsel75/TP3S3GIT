@@ -1,5 +1,17 @@
 <%- include('partials/header') %>
 
+<!-- Formulario de búsqueda -->
+<div class="search-container">
+    <form action="/dashboard" method="GET" class="search-form">
+        <input type="text" 
+               name="nombre" 
+               value="<%= busqueda %>" 
+               placeholder="Buscar por nombre..." 
+               class="search-input">
+        <button type="submit" class="btn search">🔍 Buscar</button>
+        <a href="/dashboard" class="btn clear">✖️ Limpiar</a>
+    </form>
+</div>
 <h1><%= titulo %></h1>
 
 <% if (superheroes && superheroes.length > 0) { %>

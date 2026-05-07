@@ -1,7 +1,7 @@
 import superHeroRepository from '../repositories/SuperHeroRepository.mjs';
 
 
-// MÉTODOS PARA EL CONTROLADOR 
+// funciones  PARA EL CONTROLADOR 
 
 
 export async function getAllSuperheroes() {
@@ -60,6 +60,9 @@ export async function obtenerSuperheroesMayoresDe30() {
     return await superHeroRepository.obtenerMayoresDe30();
 }
 
+
+
 export async function buscarPorAtributo(atributo, valor) {
     return await superHeroRepository.buscarPorAtributo(atributo, valor);
 }
+

@@ -1,3 +1,6 @@
+//Las rutas son el mapa de navegación de la aplicación. Le dicen a Express: "Cuando llegue una petición con esta URL y este método HTTP, ejecutá tal función del controlador".
+//Define qué URLs reconoce el servidor y qué controlador se encarga de cada una.
+
 import express from 'express';
 import {
     dashboardController,
@@ -10,7 +13,7 @@ import {
 
 import { validateSuperheroe } from '../validations/superheroeValidations.mjs';
 
-const router = express.Router();
+const router = express.Router();// la parte de express que nos interes , no todo express
 
 // Dashboard
 router.get('/', dashboardController);

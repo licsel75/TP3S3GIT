@@ -5,18 +5,47 @@ import * as superheroeService from '../services/SuperHeroesService.mjs';
 // ==========================================
 
 // Dashboard - listar todos
+// export const dashboardController = async (req, res) => {
+//     try {
+//         const superheroes = await superheroeService.getAllSuperheroes();
+//         res.render('dashboard', {
+//             titulo: 'Dashboard de Superhéroes',
+//             superheroes
+//         });
+//     } catch (error) {
+//         console.error('Error en dashboard:', error);
+//         res.status(500).send('Error al cargar el dashboard');
+//     }
+// };
+
+
+
+// Dashboard - listar todos o buscar por nombre
 export const dashboardController = async (req, res) => {
     try {
-        const superheroes = await superheroeService.getAllSuperheroes();
+        const { nombre } = req.query;  // ← captura lo que viene en ?nombre=...
+        let superheroes;
+
+        if (nombre) {
+            superheroes = await superheroeService.buscarPorAtributo('nombreSuperHeroe', nombre);
+        } else {
+            superheroes = await superheroeService.getAllSuperheroes();
+        }
+
         res.render('dashboard', {
-            titulo: 'Dashboard de Superhéroes',
-            superheroes
+            titulo: nombre ? `Resultados para "${nombre}"` : 'Dashboard de Superhéroes',
+            superheroes,
+            busqueda: nombre || ''  // ← guardamos lo que buscó para mostrarlo en el input
         });
     } catch (error) {
         console.error('Error en dashboard:', error);
         res.status(500).send('Error al cargar el dashboard');
     }
 };
+
+
+
+
 
 // Mostrar formulario para AGREGAR
 export const showAddFormController = (req, res) => {
